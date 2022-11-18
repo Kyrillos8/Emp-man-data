@@ -39,7 +39,7 @@ public class main {
                     }   break;
                 case 2:
                 {
-                    int id = myObj.nextInt();  // Read user input
+                    String id = myObj.nextLine();  // Read user input
                     String name = myObj.nextLine();  // Read user input
                     String email = myObj.nextLine();  // Read user input
                     try {
@@ -51,7 +51,7 @@ public class main {
                         //exe a sql code
 
                         //process
-                        mystt.setInt(1,id);
+                        mystt.setString(1,id);
                         mystt.setString(2, name);
                         mystt.setString(3, email);
 
