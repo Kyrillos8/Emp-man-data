@@ -39,7 +39,8 @@ public class main {
                     }   break;
                 case 2:
                 {
-                    String id = myObj.nextLine();  // Read user input
+                    int id = myObj.nextInt();  // Read user input
+                    myObj.nextLine();
                     String name = myObj.nextLine();  // Read user input
                     String email = myObj.nextLine();  // Read user input
                     try {
@@ -51,7 +52,7 @@ public class main {
                         //exe a sql code
 
                         //process
-                        mystt.setString(1,id);
+                        mystt.setInt(1,id);
                         mystt.setString(2, name);
                         mystt.setString(3, email);
 
@@ -87,6 +88,7 @@ public class main {
                 case 4:
                 {
                     int id = myObj.nextInt();  // Read user input
+                    myObj.nextLine();
                     String name = myObj.nextLine();  // Read user input
                     String email = myObj.nextLine();  // Read user input
                     try {
@@ -97,8 +99,8 @@ public class main {
                         //process
 
                         mystt.setInt(3, id);
-                        mystt.setString(1, name);
-                        mystt.setString(2, email);
+                        mystt.setString(2, name);
+                        mystt.setString(3, email);
 
                         mystt.executeUpdate();
                         myconn.close();
@@ -110,16 +112,13 @@ public class main {
                 case 5:
                     try {
                         int id = myObj.nextInt();  // Read user input
-
+                        myObj.nextLine();
                         //get connection to database
                         Connection myconn = DriverManager.getConnection(url, usr, pss);
                         //create a statement
-                        PreparedStatement mystt=myconn.prepareStatement("SELECT * FROM bank.customers WHERE customer_id = ?");
+                        PreparedStatement mystt=myconn.prepareStatement("SELECT * FROM bank.customers where customer_id = ?;");
                         //exe a sql code
-
-                        //process
                         mystt.setInt(1, id);
-                        mystt.executeUpdate();
 
                         myconn.close();
                     } catch (Exception exc) {
