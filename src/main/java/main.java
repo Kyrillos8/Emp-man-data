@@ -1,13 +1,10 @@
-import java.sql.*;
 import java.util.Scanner;
+import java.sql.*;
 
 public class main {
 
     public static void main(String[] args) {
 
-        String url = "jdbc:mysql://localhost:3306/bank";
-        String usr = "root";
-        String pss = "1234";
         Scanner myObj = new Scanner(System.in);
 
         System.out.println("enter number 1 for get all the data");
@@ -24,7 +21,7 @@ public class main {
                 case 1:
                     try {
                         //get connection to database
-                        Connection myconn = DriverManager.getConnection(url, usr, pss);
+                        Connection myconn = singleton_connection.getMyconn();
                         //create a statement
                         PreparedStatement mystt = myconn.prepareStatement("SELECT * FROM bank.customers");
                         //exe a sql code
@@ -33,7 +30,7 @@ public class main {
                         while (myres.next()) {
                             System.out.println(myres.getString("customer_id") + " " + myres.getString("customer_name") + " " + myres.getString("customer_email"));
                         }
-                        myconn.close();
+//                        myconn.close();
                     } catch (Exception exc) {
                         System.out.println(exc);
                     }   break;
@@ -45,7 +42,7 @@ public class main {
                     String email = myObj.nextLine();  // Read user input
                     try {
                         //get connection to database
-                        Connection myconn = DriverManager.getConnection(url, usr, pss);
+                        Connection myconn = singleton_connection.getMyconn();
                         //create a statement
                         String sql = "INSERT INTO `bank`.`customers` (`customer_id`, `customer_name`, `customer_email`) VALUES (?,?,?)";
                         PreparedStatement mystt = myconn.prepareStatement(sql);
@@ -60,7 +57,7 @@ public class main {
                         if (rows >0){
                             System.out.println("success");
                         }
-                        myconn.close();
+//                        myconn.close();
                     } catch (Exception exc) {
                         System.out.println(exc);
                     }       break;
@@ -70,7 +67,7 @@ public class main {
                     int id = myObj.nextInt();  // Read user input
                     try {
                         //get connection to database
-                        Connection myconn = DriverManager.getConnection(url, usr, pss);
+                        Connection myconn = singleton_connection.getMyconn();
                         //create a statement
                         PreparedStatement mystt = myconn.prepareStatement("delete FROM bank.customers where customer_id = ?");
                         //exe a sql code
@@ -78,7 +75,7 @@ public class main {
 
                         mystt.setInt(1, id);
                         mystt.executeUpdate();
-                        myconn.close();
+//                        myconn.close();
 
 
                     } catch (Exception exc) {
@@ -93,7 +90,7 @@ public class main {
                     String email = myObj.nextLine();  // Read user input
                     try {
                         //get connection to database
-                        Connection myconn = DriverManager.getConnection(url, usr, pss);
+                        Connection myconn = singleton_connection.getMyconn();
                         //create a statement    //exe a sql code
                         PreparedStatement mystt = myconn.prepareStatement("UPDATE bank.customers SET customer_email = ? ,customer_name = ?where customer_id = ?");
                         //process
@@ -103,7 +100,7 @@ public class main {
                         mystt.setString(3, email);
 
                         mystt.executeUpdate();
-                        myconn.close();
+//                        myconn.close();
 
                     } catch (Exception exc) {
                         System.out.println(exc);
@@ -114,13 +111,13 @@ public class main {
                         int id = myObj.nextInt();  // Read user input
                         myObj.nextLine();
                         //get connection to database
-                        Connection myconn = DriverManager.getConnection(url, usr, pss);
+                        Connection myconn = singleton_connection.getMyconn();
                         //create a statement
                         PreparedStatement mystt=myconn.prepareStatement("SELECT * FROM bank.customers where customer_id = ?;");
                         //exe a sql code
                         mystt.setInt(1, id);
 
-                        myconn.close();
+//                        myconn.close();
                     } catch (Exception exc) {
                         System.out.println(exc);
                     }   break;
